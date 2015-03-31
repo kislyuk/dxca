@@ -1,0 +1,85 @@
+{
+  "name": "celera_assembler",
+  "title": "Celera Assembler",
+  "summary": "Celera Assembler",
+  "dxapi": "1.0.0",
+  "version": "0.0.1",
+  "upstreamVersion": "8.3rc1",
+  "categories": ["Assembly"],
+  "inputSpec": [
+    {
+      "patterns": [
+        "*.fastq.gz"
+      ],
+      "optional": true,
+      "name": "illumina_unpaired",
+      "class": "array:file"
+    },
+    {
+      "patterns": [
+        "*.fastq.gz"
+      ],
+      "optional": true,
+      "name": "pacbio_ccs",
+      "class": "array:file"
+    },
+    {
+      "patterns": [
+        "*.fastq.gz"
+      ],
+      "optional": true,
+      "name": "pacbio_corrected",
+      "class": "array:file"
+    },
+    {
+      "patterns": [
+        "*.fastq.gz"
+      ],
+      "optional": true,
+      "name": "pacbio_raw",
+      "class": "array:file"
+    },
+    {
+      "label": "Output prefix",
+      "name": "prefix",
+      "class": "string"
+    },
+    {
+      "label": "Extra command-line options",
+      "optional": true,
+      "name": "extra_opts",
+      "class": "string"
+    }
+  ],
+  "outputSpec": [
+    {
+      "patterns": [
+        "*.fasta.gz"
+      ],
+      "label": "FASTA results",
+      "name": "results",
+      "class": "array:file"
+    }
+  ],
+  "runSpec": {
+    "execDepends": [
+      {
+        "name": "libstatistics-descriptive-perl"
+      }
+    ],
+    "systemRequirements": {
+      "main": {
+        "instanceType": "mem2_hdd2_x2"
+      },
+      "worker": {
+        "instanceType": "mem3_ssd1_x8"
+      },
+      "postprocess": {
+        "instanceType": "mem3_ssd1_x8"
+      }
+    },
+    "file": "src/code.sh",
+    "interpreter": "bash"
+  },
+  "authorizedUsers": []
+}
